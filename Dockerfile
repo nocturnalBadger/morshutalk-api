@@ -8,5 +8,5 @@ RUN python -c 'import nltk; nltk.download("averaged_perceptron_tagger_eng")'
 WORKDIR /opt/morshu
 COPY morshuapi.py  /opt/morshu/morshuapi.py
 
-CMD fastapi run morshuapi.py
+CMD python morshuapi.py
 
