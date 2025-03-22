@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 env:
-  IMAGE_NAME: morshu-api
+  IMAGE_NAME: morshutalk-api
 
 # Mostly copied from https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions
 jobs:

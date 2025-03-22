@@ -1,4 +1,6 @@
-from python:3.12-slim-bullseye
+FROM python:3.12-slim-bullseye
+
+LABEL org.opencontainers.image.source=https://github.com/nocturnalBadger/morshutalk-api
 
 RUN apt update && apt install -y ffmpeg && apt clean
 
