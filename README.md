@@ -1,14 +1,30 @@
 ## The world's first Morshu as a Service (MaaS)!
 
+(unmute video) "Welcome to the GitHub repo for the MorshuTalk API!"
 
+https://github.com/user-attachments/assets/73f08628-fd10-4720-88a3-d769310c032f
+
+This is a web server wrapper for https://github.com/n0spaces/MorshuTalk, all credit for the actual morshification goes to @n0spaces
+
+Made with [fastapi](https://fastapi.tiangolo.com/) (and it was made fast)
+
+## Usage
 https://morshu.yoinks.org/docs#/
 
-Made with fastapi (and it was made fast)
+Audio:
+```
+curl -X POST https://morshu.yoinks.org/morsh -H 'Content-Type: application/json' -d '{"message": "hello world"}' -o output.mp3
+```
 
-## Deploy instructions (from scratch on fedora 41)
+Video:
+```
+curl -X POST https://morshu.yoinks.org/morsh -H 'Content-Type: application/json' -d '{"message": "well come to the github repo for the morshu talk ay pee eye", "response_type": "video"}' -o output.mp4
+```
 
-- install git, docker, certbot
-- clone this repo
-- `sudo certbot certonly --standalone`
-- `docker build -t morshu-api .`
-- `docker run -d --restart always -v "/etc/letsencrypt/live/<hostname>/fullchain.pem:/certs/server.crt" -v /etc/letsencrypt/live/<hostname>/privkey.pem:/certs/server.key -e CERTFILE_PATH=/certs/server.crt -e CERT_KEY_PATH=/certs/server.key -p 443:8000 morshu-api`
+## Deploy instructions (don't read this if you're not me)
+
+- Install docker and stuff
+- Setup Traefik: https://github.com/nocturnalBadger/traefik-config
+- Make sure DNS is setup, update hostname in docker-compose.yml if needed
+- Clone this repo, cd
+- `docker compose up -d`
