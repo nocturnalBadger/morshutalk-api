@@ -1,0 +1,6 @@
+moviepy
+morshutalk
+fastapi
+uvicorn[standard]
+pydub
+pydantic

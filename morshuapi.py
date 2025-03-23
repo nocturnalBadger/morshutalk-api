@@ -1,20 +1,18 @@
 import io
-import tempfile
 import os
-import ssl
-from pathlib import Path
 from tempfile import NamedTemporaryFile
 from enum import Enum
+from typing import List
 
-from fastapi import FastAPI, Response, HTTPException
+from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
 from morshutalk.morshu import Morshu
 from pydantic import BaseModel
 from pydub import AudioSegment
-from moviepy import ImageSequenceClip, AudioArrayClip, AudioFileClip
+from moviepy import ImageSequenceClip, AudioFileClip
 
 MAX_SIZE = 1000
-FRAME_RATE = 60
+FRAME_RATE = 30
 SECS_PER_FRAME = (1.0 / FRAME_RATE)
 
 app = FastAPI()
@@ -38,16 +36,15 @@ def get_root():
 def construct_video(morsher: Morshu, audio: AudioSegment, output_path: str):
 
     output_frames = []
-    output_frame_indices = []
-    output_durations = []
+    output_frame_indices: List[int] = []
+    output_durations: List[float] = []
     time_offset = 0.0
-    millis_per_frame = FRAME_RATE
     while time_offset + SECS_PER_FRAME < audio.duration_seconds:
         frame_idx = morsher.get_frame_idx_from_millis(time_offset * 1000)
         if len(output_frame_indices) == 0:
             output_frame_indices.append(frame_idx)
         if not output_durations:
-            output_durations.append(0)
+            output_durations.append(0.0)
         if frame_idx == output_frame_indices[-1]:
             output_durations[-1] += SECS_PER_FRAME
         else:
