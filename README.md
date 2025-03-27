@@ -2,7 +2,7 @@
 
 (unmute video) "Welcome to the GitHub repo for the MorshuTalk API!"
 
-https://github.com/user-attachments/assets/73f08628-fd10-4720-88a3-d769310c032f
+
 
 This is a web server wrapper for https://github.com/n0spaces/MorshuTalk, all credit for the actual morshification goes to @n0spaces
 
@@ -18,7 +18,7 @@ curl -X POST https://morshu.yoinks.org/morsh -H 'Content-Type: application/json'
 
 Video:
 ```
-curl -X POST https://morshu.yoinks.org/morsh -H 'Content-Type: application/json' -d '{"message": "well come to the github repo for the morshu talk ay pee eye", "response_type": "video"}' -o output.mp4
+curl -X POST https://morshu.yoinks.org/morsh -H 'Content-Type: application/json' -d '{"message": "well come to the github ree po for the morshu talk ay pee eye", "response_type": "video"}' -o output.mp4
 ```
 
 ## Deploy instructions (don't read this if you're not me)
