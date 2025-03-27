@@ -65,7 +65,7 @@ def construct_video(morsher: Morshu, audio: AudioSegment, output_path: str):
         audio_clip = AudioFileClip(audio_file.name, fps=audio.frame_rate)
         output_clip = output_clip.with_audio(audio_clip)
 
-        output_clip.write_videofile(output_path, fps=FRAME_RATE, audio_codec="libfdk_aac", temp_audiofile=audio_file.name)
+        output_clip.write_videofile(output_path, fps=FRAME_RATE, audio_codec="aac", temp_audiofile=audio_file.name)
 
 
 @app.post("/morsh")
