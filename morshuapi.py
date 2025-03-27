@@ -45,7 +45,7 @@ def construct_video(morsher: Morshu, audio: AudioSegment, output_path: str):
             output_frame_indices.append(frame_idx)
         if not output_durations:
             output_durations.append(0.0)
-        if frame_idx == output_frame_indices[-1]:
+        if frame_idx == output_frame_indices[-1] or frame_idx == -1:
             output_durations[-1] += SECS_PER_FRAME
         else:
             output_frame_indices.append(frame_idx)
@@ -59,8 +59,8 @@ def construct_video(morsher: Morshu, audio: AudioSegment, output_path: str):
     output_frames = [master_video_frames[i] for i in output_frame_indices]
     output_clip = ImageSequenceClip(output_frames, durations=output_durations)
 
-    with NamedTemporaryFile(suffix=".mp3") as audio_file:
-        audio.export(audio_file.name, format="mp3")
+    with NamedTemporaryFile(suffix=".aac") as audio_file:
+        audio.export(audio_file.name, format="adts")
 
         audio_clip = AudioFileClip(audio_file.name, fps=audio.frame_rate)
         output_clip = output_clip.with_audio(audio_clip)
