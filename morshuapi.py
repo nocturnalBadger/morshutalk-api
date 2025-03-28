@@ -59,13 +59,13 @@ def construct_video(morsher: Morshu, audio: AudioSegment, output_path: str):
     output_frames = [master_video_frames[i] for i in output_frame_indices]
     output_clip = ImageSequenceClip(output_frames, durations=output_durations)
 
-    with NamedTemporaryFile(suffix=".m4a") as audio_file:
-        audio.export(audio_file.name, format="adts")
+    with NamedTemporaryFile(suffix=".mp3") as audio_file:
+        audio.export(audio_file.name, format="mp3")
 
         audio_clip = AudioFileClip(audio_file.name, fps=audio.frame_rate)
         output_clip = output_clip.with_audio(audio_clip)
 
-        output_clip.write_videofile(output_path, fps=FRAME_RATE, audio_codec="aac", temp_audiofile=audio_file.name)
+    output_clip.write_videofile(output_path, fps=FRAME_RATE)
 
 
 @app.post("/morsh")
